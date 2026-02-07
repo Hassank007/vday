@@ -1,32 +1,18 @@
-import { useRef, useMemo, useState, useEffect } from 'react'
+import { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
 
-function useIsMobile() {
-  const [mobile, setMobile] = useState(false)
-  useEffect(() => {
-    const check = () => setMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-  return mobile
-}
-
-function HeartParticles({ isMobile }) {
+function HeartParticles() {
   const meshRef = useRef()
   const ringRef = useRef()
   const starsRef = useRef()
 
-  const heartCount = isMobile ? 600 : 1200
-  const starCount = isMobile ? 800 : 2000
-  const ringCount = isMobile ? 200 : 400
-
   const heartData = useMemo(() => {
-    const positions = new Float32Array(heartCount * 3)
-    const colors = new Float32Array(heartCount * 3)
+    const count = 500
+    const positions = new Float32Array(count * 3)
+    const colors = new Float32Array(count * 3)
 
-    for (let i = 0; i < heartCount; i++) {
+    for (let i = 0; i < count; i++) {
       const t = Math.random() * Math.PI * 2
       const scale = 0.055
       const hx = 16 * Math.pow(Math.sin(t), 3) * scale
@@ -47,43 +33,40 @@ function HeartParticles({ isMobile }) {
         colors[i * 3] = 1.0; colors[i * 3 + 1] = 0.84; colors[i * 3 + 2] = 0.0
       }
     }
-    return { positions, colors }
-  }, [heartCount])
+    return { positions, colors, count }
+  }, [])
 
   const starData = useMemo(() => {
-    const positions = new Float32Array(starCount * 3)
-    for (let i = 0; i < starCount; i++) {
+    const count = 600
+    const positions = new Float32Array(count * 3)
+    for (let i = 0; i < count; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 25
       positions[i * 3 + 1] = (Math.random() - 0.5) * 25
       positions[i * 3 + 2] = (Math.random() - 0.5) * 15 - 5
     }
-    return { positions }
-  }, [starCount])
+    return { positions, count }
+  }, [])
 
   const ringData = useMemo(() => {
-    const positions = new Float32Array(ringCount * 3)
-    for (let i = 0; i < ringCount; i++) {
-      const angle = (i / ringCount) * Math.PI * 2
+    const count = 150
+    const positions = new Float32Array(count * 3)
+    for (let i = 0; i < count; i++) {
+      const angle = (i / count) * Math.PI * 2
       const radius = 2.2 + Math.random() * 0.3
       positions[i * 3] = Math.cos(angle) * radius
       positions[i * 3 + 1] = (Math.random() - 0.5) * 0.2 + 0.3
       positions[i * 3 + 2] = Math.sin(angle) * radius
     }
-    return { positions }
-  }, [ringCount])
+    return { positions, count }
+  }, [])
 
-  useFrame(({ clock, mouse }) => {
+  useFrame(({ clock }) => {
     const t = clock.getElapsedTime()
 
     if (meshRef.current) {
       const beat = 1 + Math.sin(t * 8) * 0.04 + Math.sin(t * 16) * 0.02
       meshRef.current.scale.set(beat, beat, beat)
-      if (!isMobile) {
-        meshRef.current.rotation.y += (mouse.x * 0.4 - meshRef.current.rotation.y) * 0.015
-        meshRef.current.rotation.x += (-mouse.y * 0.2 - meshRef.current.rotation.x) * 0.015
-      } else {
-        meshRef.current.rotation.y = Math.sin(t * 0.3) * 0.2
-      }
+      meshRef.current.rotation.y = Math.sin(t * 0.3) * 0.2
     }
 
     if (starsRef.current) {
@@ -99,87 +82,40 @@ function HeartParticles({ isMobile }) {
 
   return (
     <>
-      {/* Heart particles */}
       <points ref={meshRef} position={[0, 0.3, 0]}>
         <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={heartData.positions.length / 3}
-            array={heartData.positions}
-            itemSize={3}
-          />
-          <bufferAttribute
-            attach="attributes-color"
-            count={heartData.colors.length / 3}
-            array={heartData.colors}
-            itemSize={3}
-          />
+          <bufferAttribute attach="attributes-position" count={heartData.count} array={heartData.positions} itemSize={3} />
+          <bufferAttribute attach="attributes-color" count={heartData.count} array={heartData.colors} itemSize={3} />
         </bufferGeometry>
-        <pointsMaterial
-          size={0.025}
-          vertexColors
-          transparent
-          opacity={0.35}
-          blending={THREE.AdditiveBlending}
-          depthWrite={false}
-          sizeAttenuation
-        />
+        <pointsMaterial size={0.03} vertexColors transparent opacity={0.35} blending={THREE.AdditiveBlending} depthWrite={false} sizeAttenuation />
       </points>
 
-      {/* Star field */}
       <points ref={starsRef}>
         <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={starData.positions.length / 3}
-            array={starData.positions}
-            itemSize={3}
-          />
+          <bufferAttribute attach="attributes-position" count={starData.count} array={starData.positions} itemSize={3} />
         </bufferGeometry>
-        <pointsMaterial
-          size={0.02}
-          color="#ffffff"
-          transparent
-          opacity={0.25}
-          blending={THREE.AdditiveBlending}
-          depthWrite={false}
-        />
+        <pointsMaterial size={0.02} color="#ffffff" transparent opacity={0.2} blending={THREE.AdditiveBlending} depthWrite={false} />
       </points>
 
-      {/* Orbiting ring */}
       <points ref={ringRef}>
         <bufferGeometry>
-          <bufferAttribute
-            attach="attributes-position"
-            count={ringData.positions.length / 3}
-            array={ringData.positions}
-            itemSize={3}
-          />
+          <bufferAttribute attach="attributes-position" count={ringData.count} array={ringData.positions} itemSize={3} />
         </bufferGeometry>
-        <pointsMaterial
-          size={0.028}
-          color="#ffd700"
-          transparent
-          opacity={0.2}
-          blending={THREE.AdditiveBlending}
-          depthWrite={false}
-        />
+        <pointsMaterial size={0.028} color="#ffd700" transparent opacity={0.15} blending={THREE.AdditiveBlending} depthWrite={false} />
       </points>
     </>
   )
 }
 
 export default function HeartBackground() {
-  const isMobile = useIsMobile()
-
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
       <Canvas
         camera={{ position: [0, 0, 5], fov: 60 }}
-        gl={{ alpha: true, antialias: !isMobile }}
-        dpr={isMobile ? 1 : Math.min(window.devicePixelRatio, 2)}
+        gl={{ alpha: true, antialias: false, powerPreference: 'low-power' }}
+        dpr={1}
       >
-        <HeartParticles isMobile={isMobile} />
+        <HeartParticles />
       </Canvas>
     </div>
   )

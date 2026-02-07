@@ -1,5 +1,5 @@
 /* ======================================================
-   VALENTINE'S DAY PROPOSAL — STYLES
+   VALENTINE'S DAY PROPOSAL — MOBILE-FIRST
    ====================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;600&display=swap');
@@ -18,6 +18,7 @@
   padding: 0;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -29,7 +30,7 @@ body {
   color: var(--cream);
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
-  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">💖</text></svg>') 12 12, auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ===================== PRELOADER ===================== */
@@ -43,27 +44,29 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 0 25px;
 }
 
 .preloader-heart {
-  font-size: 80px;
+  font-size: 60px;
 }
 
 .preloader-text {
   font-family: 'Great Vibes', cursive;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--blush);
   margin-top: 20px;
+  text-align: center;
 }
 
 .preloader-btn {
-  margin-top: 40px;
-  padding: 18px 50px;
+  margin-top: 35px;
+  padding: 14px 36px;
   background: linear-gradient(135deg, var(--rose), var(--deep-rose));
   border: 2px solid var(--gold);
   color: white;
   font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   border-radius: 50px;
   cursor: pointer;
   box-shadow: 0 0 30px rgba(233, 30, 99, 0.4);
@@ -80,27 +83,28 @@ body {
 /* ===================== HERO ===================== */
 .hero {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 20px;
+  padding: 20px 25px;
   position: relative;
 }
 
 .hero-subtitle {
   font-family: 'Poppins', sans-serif;
   font-weight: 300;
-  font-size: 1rem;
-  letter-spacing: 8px;
+  font-size: 0.85rem;
+  letter-spacing: 4px;
   text-transform: uppercase;
   color: var(--blush);
 }
 
 .hero-title {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(3rem, 10vw, 8rem);
+  font-size: 3.2rem;
   background: linear-gradient(135deg, var(--blush), var(--gold), var(--rose), var(--blush));
   background-size: 300% 300%;
   -webkit-background-clip: text;
@@ -115,24 +119,24 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin: 20px 0;
+  margin: 15px 0;
 }
 
 .hero-heart-divider .line {
-  width: 80px;
+  width: 50px;
   height: 1px;
   background: linear-gradient(to right, transparent, var(--gold), transparent);
 }
 
 .hero-heart-divider .heart {
   color: var(--rose);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
 .hero-message {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1rem, 2.5vw, 1.4rem);
-  max-width: 600px;
+  font-size: 1rem;
+  max-width: 320px;
   line-height: 1.8;
   color: rgba(255, 248, 240, 0.85);
   font-style: italic;
@@ -140,7 +144,7 @@ body {
 
 .scroll-indicator {
   position: absolute;
-  bottom: 40px;
+  bottom: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -148,296 +152,66 @@ body {
 }
 
 .scroll-indicator span {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--blush);
 }
 
 .scroll-arrow {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   border-right: 2px solid var(--gold);
   border-bottom: 2px solid var(--gold);
   transform: rotate(45deg);
 }
 
-/* ===================== LOVE LETTER ===================== */
-.love-letter-section {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 20px;
-  position: relative;
-}
-
-.envelope {
-  position: relative;
-  width: min(90vw, 650px);
-}
-
-.letter-container {
-  background: linear-gradient(135deg, #1a0a0a, #2a0a15, #1a0a0a);
-  border: 1px solid rgba(255, 215, 0, 0.2);
-  border-radius: 20px;
-  padding: 50px 40px;
-  box-shadow:
-    0 0 60px rgba(233, 30, 99, 0.15),
-    inset 0 0 60px rgba(233, 30, 99, 0.05);
-  transition: transform 0.5s ease;
-}
-
-.letter-container:hover {
-  transform: scale(1.02);
-}
-
-.letter-seal {
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, var(--rose), var(--deep-rose));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  box-shadow: 0 0 20px rgba(233, 30, 99, 0.5);
-  border: 2px solid var(--gold);
-}
-
-.letter-date {
-  text-align: right;
-  font-size: 0.85rem;
-  color: var(--gold);
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  margin-bottom: 25px;
-  opacity: 0.7;
-}
-
-.letter-greeting {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2.5rem;
-  color: var(--blush);
-  margin-bottom: 25px;
-}
-
-.letter-body {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
-  line-height: 2;
-  color: rgba(255, 248, 240, 0.9);
-}
-
-.letter-body p {
-  margin-bottom: 18px;
-}
-
-.letter-closing {
-  font-family: 'Great Vibes', cursive;
-  font-size: 2rem;
-  color: var(--rose);
-  text-align: right;
-  margin-top: 30px;
-}
-
-/* ===================== REASONS ===================== */
-.reasons-section {
-  min-height: 100vh;
-  padding: 100px 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.section-title {
-  font-family: 'Great Vibes', cursive;
-  font-size: clamp(2.5rem, 6vw, 4rem);
-  text-align: center;
-  background: linear-gradient(135deg, var(--blush), var(--gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 60px;
-}
-
-.reasons-grid {
-  max-width: 1000px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
-}
-
-.reason-card {
-  background: linear-gradient(135deg, rgba(233, 30, 99, 0.08), rgba(26, 10, 10, 0.9));
-  border: 1px solid rgba(255, 215, 0, 0.1);
-  border-radius: 20px;
-  padding: 35px 25px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-  cursor: default;
-}
-
-.reason-card::before {
-  content: '';
-  position: absolute;
-  top: -50%; left: -50%;
-  width: 200%; height: 200%;
-  background: radial-gradient(circle, rgba(233, 30, 99, 0.1) 0%, transparent 60%);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.reason-card:hover::before {
-  opacity: 1;
-}
-
-.reason-icon {
-  font-size: 3rem;
-  margin-bottom: 15px;
-  display: block;
-}
-
-.reason-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
-  color: var(--gold);
-  margin-bottom: 10px;
-}
-
-.reason-text {
-  font-size: 0.9rem;
-  color: rgba(255, 248, 240, 0.75);
-  line-height: 1.6;
-}
-
-/* ===================== TIMELINE ===================== */
-.timeline-section {
-  min-height: 100vh;
-  padding: 100px 20px;
-  position: relative;
-}
-
-.timeline {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, var(--rose), var(--gold), var(--rose), transparent);
-}
-
-.timeline-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 60px;
-}
-
-.timeline-item.reverse {
-  flex-direction: row-reverse;
-}
-
-.timeline-content {
-  width: 42%;
-  background: linear-gradient(135deg, rgba(233, 30, 99, 0.1), rgba(255, 215, 0, 0.05));
-  border: 1px solid rgba(255, 215, 0, 0.15);
-  border-radius: 15px;
-  padding: 25px;
-  position: relative;
-  transition: all 0.4s ease;
-}
-
-.timeline-content:hover {
-  transform: scale(1.05);
-  border-color: var(--gold);
-  box-shadow: 0 0 30px rgba(233, 30, 99, 0.2);
-}
-
-.timeline-dot {
-  width: 16%;
-  display: flex;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-
-.timeline-spacer {
-  width: 42%;
-}
-
-.timeline-emoji {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  display: block;
-}
-
-.timeline-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.2rem;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-
-.timeline-text {
-  font-size: 0.9rem;
-  color: rgba(255, 248, 240, 0.8);
-  line-height: 1.6;
-}
-
 /* ===================== PROPOSAL ===================== */
 .proposal-section {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 80px 20px;
+  padding: 60px 20px;
   position: relative;
 }
 
 .proposal-title {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(2.5rem, 8vw, 5.5rem);
+  font-size: 2.8rem;
   background: linear-gradient(135deg, var(--blush), var(--gold), var(--rose));
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: shimmer 3s ease-in-out infinite;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
 }
 
 .proposal-subtitle {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  font-size: 1rem;
   color: rgba(255, 248, 240, 0.8);
   font-style: italic;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .proposal-buttons {
   display: flex;
-  gap: 30px;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  min-height: 180px;
+  position: relative;
+  width: 100%;
 }
 
 .btn-yes {
-  padding: 20px 60px;
-  font-size: 1.5rem;
+  padding: 16px 50px;
+  font-size: 1.3rem;
   font-family: 'Playfair Display', serif;
   background: linear-gradient(135deg, var(--rose), #ff4081, var(--deep-rose));
   color: white;
@@ -461,8 +235,8 @@ body {
 }
 
 .btn-no {
-  padding: 15px 40px;
-  font-size: 1rem;
+  padding: 12px 30px;
+  font-size: 0.95rem;
   font-family: 'Poppins', sans-serif;
   background: transparent;
   color: rgba(255, 248, 240, 0.4);
@@ -489,7 +263,7 @@ body {
 
 .celebration-text {
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(3rem, 10vw, 7rem);
+  font-size: 3rem;
   background: linear-gradient(135deg, var(--gold), var(--blush), var(--gold));
   background-size: 300% 300%;
   -webkit-background-clip: text;
@@ -500,14 +274,14 @@ body {
 
 .celebration-sub {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1rem, 3vw, 1.8rem);
+  font-size: 1.1rem;
   color: var(--blush);
   margin-top: 20px;
 }
 
 .celebration-hearts {
-  font-size: 4rem;
-  margin-top: 30px;
+  font-size: 3rem;
+  margin-top: 25px;
 }
 
 .floating-emoji {
@@ -543,22 +317,22 @@ body {
 
 .sparkle {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   background: var(--gold);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--gold), 0 0 20px var(--rose);
+  box-shadow: 0 0 8px var(--gold), 0 0 16px var(--rose);
   pointer-events: none;
 }
 
 /* ===================== MUSIC TOGGLE ===================== */
 .music-toggle {
   position: fixed;
-  bottom: 25px;
-  right: 25px;
+  bottom: 20px;
+  right: 20px;
   z-index: 100;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--rose), var(--deep-rose));
   border: 1px solid var(--gold);
@@ -574,7 +348,7 @@ body {
   display: flex;
   gap: 2px;
   align-items: flex-end;
-  height: 18px;
+  height: 16px;
 }
 
 .music-bars span {
@@ -603,38 +377,28 @@ body {
 
 @keyframes musicBar {
   0% { height: 4px; }
-  100% { height: 18px; }
+  100% { height: 16px; }
 }
 
-/* ===================== RESPONSIVE ===================== */
-@media (max-width: 768px) {
-  .hero-subtitle {
-    letter-spacing: 4px;
-    font-size: 0.85rem;
+/* ===================== DESKTOP OVERRIDES ===================== */
+@media (min-width: 769px) {
+  body {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><text y="20" font-size="20">💖</text></svg>') 12 12, auto;
   }
-  .proposal-section {
-    padding: 60px 15px;
-  }
-  .proposal-buttons {
-    flex-direction: column;
-    align-items: center;
-    min-height: 200px;
-    position: relative;
-  }
-  .btn-yes {
-    padding: 16px 45px;
-    font-size: 1.25rem;
-  }
-  .btn-no {
-    padding: 12px 30px;
-  }
-  .preloader-text {
-    font-size: 1.5rem;
-    padding: 0 20px;
-    text-align: center;
-  }
-  .preloader-btn {
-    padding: 14px 36px;
-    font-size: 1.1rem;
-  }
+  .preloader-heart { font-size: 80px; }
+  .preloader-text { font-size: 2rem; }
+  .preloader-btn { padding: 18px 50px; font-size: 1.3rem; }
+  .hero-subtitle { font-size: 1rem; letter-spacing: 8px; }
+  .hero-title { font-size: clamp(4rem, 10vw, 8rem); }
+  .hero-heart-divider .line { width: 80px; }
+  .hero-message { font-size: 1.3rem; max-width: 600px; }
+  .proposal-title { font-size: clamp(3rem, 8vw, 5.5rem); }
+  .proposal-subtitle { font-size: 1.3rem; margin-bottom: 50px; }
+  .proposal-buttons { flex-direction: row; gap: 30px; min-height: auto; }
+  .btn-yes { padding: 20px 60px; font-size: 1.5rem; }
+  .btn-no { padding: 15px 40px; font-size: 1rem; }
+  .celebration-text { font-size: clamp(4rem, 10vw, 7rem); }
+  .celebration-sub { font-size: 1.8rem; }
+  .celebration-hearts { font-size: 4rem; }
+  .music-toggle { width: 50px; height: 50px; bottom: 25px; right: 25px; }
 }

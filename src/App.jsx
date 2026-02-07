@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import Lenis from 'lenis'
 import HeartBackground from './components/HeartBackground'
 import Preloader from './components/Preloader'
 import Hero from './components/Hero'
@@ -8,11 +9,33 @@ import Celebration from './components/Celebration'
 import FloatingPetals from './components/FloatingPetals'
 import SparkleTrail from './components/SparkleTrail'
 import MusicToggle from './components/MusicToggle'
+import 'lenis/dist/lenis.css'
 import './App.css'
 
 export default function App() {
   const [started, setStarted] = useState(false)
   const [celebrate, setCelebrate] = useState(false)
+
+  useEffect(() => {
+    if (!started) return
+
+    const lenis = new Lenis({
+      duration: 1.6,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      smooth: true,
+      touchMultiplier: 2,
+      touchInertiaMultiplier: 25,
+    })
+
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+    requestAnimationFrame(raf)
+
+    return () => lenis.destroy()
+  }, [started])
 
   return (
     <>
